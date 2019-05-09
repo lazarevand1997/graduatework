@@ -4,7 +4,13 @@
   "description": "Graduate work MIET",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lazarevand1997/graduatework.git"
   },
   "author": "Andrey Lazarev",
   "license": "ISC",
@@ -12,6 +18,8 @@
     "body-parser": "^1.19.0",
     "express": "^4.16.4",
     "express-session": "^1.16.1",
-    "path": "^0.12.7"
+    "jsonwebtoken": "^8.5.1",
+    "path": "^0.12.7",
+    "pg": "^7.10.0"
   }
 }
