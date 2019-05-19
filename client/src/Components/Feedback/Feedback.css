@@ -1,0 +1,15 @@
+.feedback-wrapper{
+    height: 100vh;
+    width: 100vw;
+}
+
+.feedback-form{
+    padding-top: 15%;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.feedback-title{
+    color: white;
+    padding-bottom: 5%;
+}
