@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'client/build')))
 
 //api use 
 
-app.use("/api", api);
+// app.use("/api", api);
 
 //uncomment before deploy
 
