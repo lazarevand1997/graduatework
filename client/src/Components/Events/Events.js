@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { Card, Button, CardTitle, CardText } from 'reactstrap';
 import "./Events.css";
 
 class Events extends Component {
