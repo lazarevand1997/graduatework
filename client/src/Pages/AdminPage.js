@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import AdminMain from "../Components/AdminMain/AdminMain";
 import AdminNews from "../Components/AdminNews/AdminNews";
 import AdminEvents from "../Components/AdminEvents/AdminEvents";
-import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 
 
 class HomePage extends Component {

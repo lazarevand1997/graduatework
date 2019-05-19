@@ -28,9 +28,9 @@ app.use(express.static(path.join(__dirname, 'client/build')))
 
 //uncomment before deploy
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname + '/client/build/index.html'));
-// })
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'));
+})
 
 // start server
 const PORT = process.env.PORT || 5000;

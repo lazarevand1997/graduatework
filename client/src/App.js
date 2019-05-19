@@ -13,8 +13,8 @@ class App extends Component {
           <BrowserRouter>
               <Switch>
                 <Route exact path="/" component={HomePage} />
-                <Route exact path="/events" component={EventsPage} />
-                <Route exact path="/admin" component={AdminPage} />
+                <Route path="/events" component={EventsPage} />
+                <Route path="/admin" component={AdminPage} />
               </Switch>
           </BrowserRouter>
       </div>

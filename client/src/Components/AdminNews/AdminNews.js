@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Toast, ToastBody, ToastHeader, Button, Row, Col , Form, FormGroup, Label, Input} from 'reactstrap';
+import { Toast, ToastBody, ToastHeader, Button, Row, Col , Form, FormGroup, Input} from 'reactstrap';
 import "./AdminNews.css";
 
 
