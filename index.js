@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-// const api = require("./api");
+const api = require("./api");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const path = require('path');
@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'client/build')))
 
 //api use 
 
-// app.use("/api", api);
+app.use("/api", api);
 
 //uncomment before deploy
 

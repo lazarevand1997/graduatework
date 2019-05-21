@@ -26,8 +26,8 @@ module.exports = {
     create: (req, res) => {
         var login = req.body.login;
         var email = req.body.email;
-        var is_admin = req.body.is_admin;
-        var password = firstname + lastname;
+        var is_admin = false;
+        var password = req.body.password;
         bcrypt.hash(password, BCRYPT_SALT_ROUNDS)
          .then(function(hashedPassword) {
              pool.query('INSERT INTO users(user_name, password, is_admin, email) values($1, $2, $3, $4)',
@@ -62,6 +62,10 @@ module.exports = {
              return res.send('error pass');
          });
     },
+
+    check: (req, res) => {
+        return res.send({ username: req.session.name, isadmin: req.session.isadmin, email: req.session.email });
+    },
   
 
     login: (req, res) => {
@@ -72,6 +76,7 @@ module.exports = {
                throw error;
              };
              var user_data = results.rows;
+             console.log(user_data);
              var picked_user = user_data.find(o => o.user_name === login);
              if((picked_user) && bcrypt.compareSync(password, picked_user.password)){
                      var access_token = createToken({
@@ -84,6 +89,7 @@ module.exports = {
                      req.session.name = picked_user.user_name;
                      req.session.isadmin = picked_user.is_admin;
                      req.session.userid = picked_user.user_id;
+                     req.session.email = picked_user.email;
                      return res
                           .status(201)
                           .json({ status: "success", user_name: picked_user.user_name, access_token: access_token});
