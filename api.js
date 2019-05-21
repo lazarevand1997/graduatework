@@ -1,5 +1,6 @@
 const express = require("express");
 const userController = require("./controllers/userController");
+const newsController = require("./controllers/newsController");
 const jwt =require("jsonwebtoken");
 var {SECRET} = require("./config");
 
@@ -46,6 +47,11 @@ router.use((req, res, next) => {
 });
 router.post("/changepass", userController.changePassword);
 router.get("/check", userController.check);
+// news
+router.post("/addnews", newsController.create);
+router.get("/showallnews", newsController.readall);
+router.get("/showlastnews", newsController.readlast);
+router.post("/delnews", newsController.delete);
 // router.post("/createcounter", waterController.create);
 // router.get("/usercouner", waterController.read);
 // router.get("/alluserscouner", waterController.readall);
