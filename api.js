@@ -1,6 +1,7 @@
 const express = require("express");
 const userController = require("./controllers/userController");
 const newsController = require("./controllers/newsController");
+const eventController = require("./controllers/eventController");
 const jwt =require("jsonwebtoken");
 var {SECRET} = require("./config");
 
@@ -37,6 +38,11 @@ var router = express.Router();
 
 router.post("/signup", userController.create);
 router.post("/signin", userController.login);
+
+router.get("/showallnews", newsController.readall);
+router.get("/showlastnews", newsController.readlast);
+
+router.get("/showallevents", eventController.readall);
 router.use((req, res, next) => {
   let auth = checkToken(req, SECRET);
   if (auth.status === "error") {
@@ -49,14 +55,9 @@ router.post("/changepass", userController.changePassword);
 router.get("/check", userController.check);
 // news
 router.post("/addnews", newsController.create);
-router.get("/showallnews", newsController.readall);
-router.get("/showlastnews", newsController.readlast);
 router.post("/delnews", newsController.delete);
-// router.post("/createcounter", waterController.create);
-// router.get("/usercouner", waterController.read);
-// router.get("/alluserscouner", waterController.readall);
-// router.get("/read", userController.read);
-// router.post("/adminread", waterController.adminread);
-// router.post('/topusers', userController.gettop);
+// events
+router.post("/addevent", eventController.create);
+router.post("/delevent", eventController.delete);
 
 module.exports = router;

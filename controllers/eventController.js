@@ -11,12 +11,12 @@ const pool = new Pool({
 
 module.exports = {
     create: (req, res) => {
-        let today = new Date;
         var title = req.body.title;
         var description = req.body.description;
-        var date = today.getUTCFullYear() + '-' + (today.getUTCMonth() + 1) + '-' + today.getUTCDate();
-        pool.query('INSERT INTO public.news(news_name, description, news_date) values($1, $2, $3)',
-        [title, description, date], (err, response) => {
+        var tickets = req.body.tickets;
+        var date = req.body.date;
+        pool.query('INSERT INTO public.events(event_name, description, event_date, tickets) values($1, $2, $3, $4)',
+        [title, description, date, tickets], (err, response) => {
             if (err) throw err;
             return res.json({response:response, status:"success"});
         });
@@ -24,29 +24,20 @@ module.exports = {
 
     readall: (req, res) => {
         var result = [];
-        pool.query('SELECT * FROM public.news ORDER BY news_id DESC;', (err, response) => {
+        pool.query('SELECT t1.*, SUM(t2.ticket_number) as total_count FROM events as t1, tickets as t2 WHERE t1.event_id = t2.event GROUP BY t1.event_id;'
+            , (err, response) => {
           if (err) throw err;
           for (let row of response.rows) {
             result.push(JSON.stringify(row));
           }
-          return res.json(result);
-        });
-    },
-
-    readlast: (req, res) => {
-        var result = [];
-        pool.query('SELECT * FROM public.news ORDER BY news_id DESC LIMIT 3;', (err, response) => {
-          if (err) throw err;
-          for (let row of response.rows) {
-            result.push(JSON.stringify(row));
-          }
+          console.log(result);
           return res.json(result);
         });
     },
 
     delete: (req, res) => {
         let news_id = req.body.newsId;
-        pool.query('DELETE FROM public.news WHERE news_id = $1', [news_id], (err, response) => {
+        pool.query('DELETE FROM public.events WHERE event_id = $1', [news_id], (err, response) => {
           if (err) throw err;
           return res.json(response);
         });
