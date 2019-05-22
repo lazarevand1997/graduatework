@@ -7,11 +7,54 @@ import "./AdminMain.css";
 class AdminMain extends Component {
   constructor(props) {
     super(props);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handleEmail = this.handleEmail.bind(this);
+    this.handlePassword = this.handlePassword.bind(this);
     this.state = {
       username: null,
       email: null,
+      reg_login: "",
+      reg_mail: "",
+      reg_password: "",
+      sended: false
     };
   }
+
+  handleLogin(e) {
+    this.setState({ reg_login: e.target.value });
+  };
+
+  handleEmail(e) {
+    this.setState({ reg_mail: e.target.value });
+  };
+
+  handlePassword(e) {
+    this.setState({ reg_password: e.target.value });
+  };
+
+  signUp() {
+    if((this.state.reg_login !== '') && (this.state.reg_mail !== '')
+    && (this.state.reg_password !== '')){
+        axios
+          .post("/api/signup", {
+            login: this.state.reg_login,
+            email: this.state.reg_mail,
+            password: this.state.reg_password,
+          })
+          .then(res => {
+            if(res.data.command === "INSERT"){
+                this.setState({ sended: true});
+            } else {
+                this.setState({ sended: false });
+            }
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      } else {
+            console.log('form not valid');
+      }
+  };
 
   logout() {
     localStorage.removeItem("access_token");
@@ -46,7 +89,6 @@ class AdminMain extends Component {
                 <div className="mt-3">
                   <p>UserName: {username}</p>
                   <p>E-mail: {email}</p>
-                  <p><Button color="info">Изменить пароль</Button></p>
                   <p><Button onClick={this.logout.bind(this)} color="warning">Выйти</Button></p>
                 </div>
               </Col>
@@ -57,22 +99,22 @@ class AdminMain extends Component {
                     <Col md={6}>
                       <FormGroup>
                       <Label for="userName">User name</Label>
-                      <Input type="text" name="userName" id="userName" placeholder="User name"/>
+                      <Input onChange={this.handleLogin} type="text" name="userName" id="userName" placeholder="User name"/>
                     </FormGroup>
                     </Col>
                     <Col md={6}>
                       <FormGroup>
                         <Label for="Password">Password</Label>
-                        <Input type="password" name="password" id="Password" placeholder="password" />
+                        <Input onChange={this.handlePassword} type="password" name="password" id="Password" placeholder="password" />
                       </FormGroup>
                     </Col>
                   </Row>
                   <FormGroup>
                         <Label for="exampleEmail">Email</Label>
-                        <Input type="email" name="email" id="exampleEmail" placeholder="with a placeholder" />
+                        <Input onChange={this.handleEmail} type="email" name="email" id="exampleEmail" placeholder="with a placeholder" />
                   </FormGroup>
                   <FormGroup >
-                    <Button color="info">Add user</Button>
+                    <Button onClick={this.signUp.bind(this)} color="info">Add user</Button>
                   </FormGroup>
                 </Form>
               </Col>

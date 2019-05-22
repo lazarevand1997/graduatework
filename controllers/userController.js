@@ -47,6 +47,7 @@ module.exports = {
     changePassword: (req, res) => {
         var userid = req.session.userid;
         var new_password  = req.body.new_password;
+        var new_password  = req.body.old_password;
         bcrypt.hash(new_password, BCRYPT_SALT_ROUNDS)
          .then(function(hashedPassword) {
              pool.query('UPDATE users SET password = $1 WHERE user_id = $2',
