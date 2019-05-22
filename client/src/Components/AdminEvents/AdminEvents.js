@@ -127,6 +127,12 @@ componentDidMount() {
           {this.state.data.map((item, key) => {
                 let event = JSON.parse(item);
                 let eventDate = event.event_date;
+                let eventTickets;
+                if (event.total_count){
+                  eventTickets = event.total_count;
+                } else {
+                  eventTickets = 0;
+                }
                 eventDate = eventDate.substring(0, eventDate.length-14);
                     return (
                         <div key={key} className="admin-news-wrapper mt-4">
@@ -136,13 +142,13 @@ componentDidMount() {
                                 </ToastHeader>
                                 <ToastBody>
                                     {event.description}
-                                    <p>Tickets: {event.total_count} / {event.tickets}</p>
+                                    <p>Tickets: {eventTickets} / {event.tickets}</p>
                                     <p><i>{eventDate}</i></p>
                                 </ToastBody>
                             </Toast>
                             <div className="text-center">
-                                <Button data-id={event.news_id} color="info">Изменть</Button>{' '}
-                                <Button data-id={event.news_id} onClick={this.deleteEvent.bind(this)} color="warning">Удалить</Button>
+                                <Button data-id={event.event_id} color="info">Изменть</Button>{' '}
+                                <Button data-id={event.event_id} onClick={this.deleteEvent.bind(this)} color="warning">Удалить</Button>
                             </div>
                         </div>
                     );
@@ -158,7 +164,7 @@ componentDidMount() {
                         <Input onChange={this.handleDescription} type="textarea" name="eventDescription" id="eventDescription" placeholder="Описание события"/>
                   </FormGroup>
                   <FormGroup>
-                        <Input onChange={this.handleTickets} type="number" name="eventTickets" id="eventTickets" placeholder="Кол-во билетов (оставьте пустым, если не требуется)"/>
+                        <Input onChange={this.handleTickets} type="number" name="eventTickets" id="eventTickets" placeholder="Кол-во билетов"/>
                   </FormGroup>
                   <FormGroup>
                     <Label for="exampleDate">Дата проведения</Label>

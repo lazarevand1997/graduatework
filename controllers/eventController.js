@@ -24,20 +24,19 @@ module.exports = {
 
     readall: (req, res) => {
         var result = [];
-        pool.query('SELECT t1.*, SUM(t2.ticket_number) as total_count FROM events as t1, tickets as t2 WHERE t1.event_id = t2.event GROUP BY t1.event_id;'
+        pool.query('SELECT t1.*, SUM(t2.ticket_number) as total_count FROM events as t1 LEFT JOIN tickets as t2 ON t1.event_id = t2.event GROUP BY t1.event_id;'
             , (err, response) => {
           if (err) throw err;
           for (let row of response.rows) {
             result.push(JSON.stringify(row));
           }
-          console.log(result);
           return res.json(result);
         });
     },
 
     delete: (req, res) => {
-        let news_id = req.body.newsId;
-        pool.query('DELETE FROM public.events WHERE event_id = $1', [news_id], (err, response) => {
+        let eventId = req.body.eventId;
+        pool.query('DELETE FROM public.events WHERE event_id = $1', [eventId], (err, response) => {
           if (err) throw err;
           return res.json(response);
         });
