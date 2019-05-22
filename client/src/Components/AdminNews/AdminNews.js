@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Toast, ToastBody, ToastHeader, Button, Row, Col , Form, FormGroup, Input} from 'reactstrap';
+import { Toast, ToastBody, ToastHeader, Button, Row, Col , Form, FormGroup, Input, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import axios from "axios";
 import $ from 'jquery';
 import "./AdminNews.css";
+import AdminNewsChange from "./AdminNewsChange";
 
 
 class AdminNews extends Component {
@@ -10,12 +11,43 @@ class AdminNews extends Component {
         super(props);
         this.handleTitle = this.handleTitle.bind(this);
         this.handleDescription = this.handleDescription.bind(this);
+        this.toggle = this.toggle.bind(this);
         this.state = {
           data: [],
           title: null,
           description: null,
-          nice_add:false
+          nice_add:false,
+          modal: false,
+          modal_id: null,
+          modal_title: null,
+          modal_desc: null,
         };
+    }
+
+    toggle(e) {
+      let element = $(e.currentTarget);
+      let modal_id = $(element).data('id');
+      let modal_title = $(element).data('title');
+      let modal_desc = $(element).data('description');
+      this.setState(prevState => ({
+        modal_id: modal_id,
+        modal_title: modal_title,
+        modal_desc: modal_desc,
+        modal: !prevState.modal
+      }));
+        axios.defaults.headers.common.authorization = localStorage.getItem(
+          "access_token"
+        );
+        axios
+          .get("/api/showallnews")
+          .then(res => {
+            if (res) {
+                this.setState({
+                    data: res.data
+                });
+            }
+          })
+          .catch(err => console.log(err));
     }
 
     handleTitle(e) {
@@ -125,7 +157,7 @@ class AdminNews extends Component {
                                 </ToastBody>
                             </Toast>
                             <div className="text-center">
-                                <Button data-id={newsItem.news_id} color="info">Изменть</Button>{' '}
+                                <Button data-id={newsItem.news_id} data-title={newsItem.news_name} data-description={newsItem.description} onClick={this.toggle} color="info">Изменть</Button>{' '}
                                 <Button data-id={newsItem.news_id} onClick={this.deleteNews.bind(this)} color="warning">Удалить</Button>
                             </div>
                         </div>
@@ -147,6 +179,12 @@ class AdminNews extends Component {
                 </Form>
         </Col>
         </Row>
+        <Modal isOpen={this.state.modal} toggle={this.toggle} centered={true} className={this.props.className} >
+             <ModalHeader toggle={this.toggle}>Изменить новость</ModalHeader>
+             <ModalBody>
+              <AdminNewsChange newsId={this.state.modal_id} title={this.state.modal_title} description={this.state.modal_desc} />
+             </ModalBody>
+        </Modal>
     </div>
     );
   }

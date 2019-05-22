@@ -56,6 +56,7 @@ router.get("/check", userController.check);
 // news
 router.post("/addnews", newsController.create);
 router.post("/delnews", newsController.delete);
+router.post("/updatenews", newsController.change_news);
 // events
 router.post("/addevent", eventController.create);
 router.post("/delevent", eventController.delete);

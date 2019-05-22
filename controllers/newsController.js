@@ -44,6 +44,17 @@ module.exports = {
         });
     },
 
+    change_news: (req, res) => {
+      var news_id = req.body.newsId;
+      var title = req.body.title;
+      var description  = req.body.description;
+      pool.query('UPDATE news SET news_name = $1, description = $2 WHERE news_id = $3',
+        [title, description, news_id], (err, response) => {
+            if (err) throw err;
+            return res.json(response);
+        });
+    },
+
     delete: (req, res) => {
         let news_id = req.body.newsId;
         pool.query('DELETE FROM public.news WHERE news_id = $1', [news_id], (err, response) => {
