@@ -2,6 +2,7 @@ const express = require("express");
 const userController = require("./controllers/userController");
 const newsController = require("./controllers/newsController");
 const eventController = require("./controllers/eventController");
+const ticketController = require("./controllers/ticketController");
 const jwt =require("jsonwebtoken");
 var {SECRET} = require("./config");
 
@@ -43,6 +44,9 @@ router.get("/showallnews", newsController.readall);
 router.get("/showlastnews", newsController.readlast);
 
 router.get("/showallevents", eventController.readall);
+
+router.post("/getticket", ticketController.create);
+router.get("/checkticket", ticketController.checkticket);
 router.use((req, res, next) => {
   let auth = checkToken(req, SECRET);
   if (auth.status === "error") {
