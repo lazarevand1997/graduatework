@@ -9,7 +9,6 @@ import {
   NavLink
 } from 'reactstrap';
 import "./Header.css";
-
 export default class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -32,7 +31,7 @@ export default class Header extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/">Новости</NavLink>
+                <NavLink href="/#newsblock">Новости</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/events">Расписание</NavLink>
