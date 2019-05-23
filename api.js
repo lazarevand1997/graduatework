@@ -60,5 +60,6 @@ router.post("/updatenews", newsController.change_news);
 // events
 router.post("/addevent", eventController.create);
 router.post("/delevent", eventController.delete);
+router.post("/updateevent", eventController.change_event);
 
 module.exports = router;

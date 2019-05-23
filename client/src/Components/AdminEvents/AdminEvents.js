@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Toast, ToastBody, ToastHeader, Button, Row, Col , Form, FormGroup, Label, Input} from 'reactstrap';
+import { Toast, ToastBody, ToastHeader, Button, Row, Col , Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody} from 'reactstrap';
 import axios from "axios";
 import $ from 'jquery';
 import "./AdminEvents.css";
-
+import AdminEventChange from "./AdminEventChange";
 
 class AdminEvents extends Component {
 
@@ -13,13 +13,21 @@ class AdminEvents extends Component {
     this.handleDescription = this.handleDescription.bind(this);
     this.handleTickets = this.handleTickets.bind(this);
     this.handleDate = this.handleDate.bind(this);
+    this.toggle = this.toggle.bind(this);
     this.state = {
       data: [],
       title: null,
       description: null,
       tickets: null,
       date: null,
-      nice_add:false
+      nice_add:false,
+      modal: false,
+      modal_id: null,
+      modal_title: null,
+      modal_desc: null,
+      modal_date: null,
+      modal_tickets: null,
+      modal_min_tickets: null,
     };
   }
 
@@ -38,6 +46,38 @@ handleTickets(e) {
 handleDate(e) {
   this.setState({ date: e.target.value });
 };
+
+toggle(e) {
+  let element = $(e.currentTarget);
+  let modal_id = $(element).data('id');
+  let modal_title = $(element).data('title');
+  let modal_desc = $(element).data('description');
+  let modal_date = $(element).data('date');
+  let modal_tickets = $(element).data('tickets');
+  let modal_min_tickets = $(element).data('min_tickets');
+  this.setState(prevState => ({
+    modal_id: modal_id,
+    modal_title: modal_title,
+    modal_desc: modal_desc,
+    modal_date: modal_date,
+    modal_tickets: modal_tickets,
+    modal_min_tickets: modal_min_tickets,
+    modal: !prevState.modal
+  }));
+    axios.defaults.headers.common.authorization = localStorage.getItem(
+      "access_token"
+    );
+    axios
+      .get("/api/showallevents")
+      .then(res => {
+        if (res) {
+            this.setState({
+                data: res.data
+            });
+        }
+      })
+      .catch(err => console.log(err));
+}
 
 sendEvent() {
         axios.defaults.headers.common.authorization = localStorage.getItem(
@@ -147,7 +187,16 @@ componentDidMount() {
                                 </ToastBody>
                             </Toast>
                             <div className="text-center">
-                                <Button data-id={event.event_id} color="info">Изменть</Button>{' '}
+                                <Button 
+                                  data-id={event.event_id} 
+                                  data-title={event.event_name}
+                                  data-description={event.description}
+                                  data-date={eventDate}
+                                  data-tickets={event.tickets}
+                                  data-min_tickets={eventTickets}
+                                  onClick={this.toggle} 
+                                  color="info"
+                                >Изменть</Button>{' '}
                                 <Button data-id={event.event_id} onClick={this.deleteEvent.bind(this)} color="warning">Удалить</Button>
                             </div>
                         </div>
@@ -182,6 +231,19 @@ componentDidMount() {
                 </Form>
         </Col>
         </Row>
+        <Modal isOpen={this.state.modal} toggle={this.toggle} centered={true} className={this.props.className} >
+             <ModalHeader toggle={this.toggle}>Изменить новость</ModalHeader>
+             <ModalBody>
+                <AdminEventChange 
+                  eventId={this.state.modal_id} 
+                  title={this.state.modal_title} 
+                  description={this.state.modal_desc} 
+                  date={this.state.modal_date} 
+                  tickets={this.state.modal_tickets} 
+                  min_tickets={this.state.modal_min_tickets} 
+                />
+             </ModalBody>
+        </Modal>
     </div>
     );
   }

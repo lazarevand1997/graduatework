@@ -34,6 +34,19 @@ module.exports = {
         });
     },
 
+    change_event: (req, res) => {
+      var event_id = req.body.eventId;
+      var title = req.body.title;
+      var description  = req.body.description;
+      var tickets  = req.body.tickets;
+      var date = req.body.date;
+      pool.query('UPDATE events SET event_name = $1, description = $2, tickets = $3, event_date = $4 WHERE event_id = $5',
+        [title, description, tickets, date, event_id], (err, response) => {
+            if (err) throw err;
+            return res.json(response);
+        });
+    },
+
     delete: (req, res) => {
         let eventId = req.body.eventId;
         pool.query('DELETE FROM public.events WHERE event_id = $1', [eventId], (err, response) => {

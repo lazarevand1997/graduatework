@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Toast, ToastBody, ToastHeader, Button, Row, Col , Form, FormGroup, Input, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import { Toast, ToastBody, ToastHeader, Button, Row, Col , Form, FormGroup, Input, Modal, ModalHeader, ModalBody} from 'reactstrap';
 import axios from "axios";
 import $ from 'jquery';
 import "./AdminNews.css";
