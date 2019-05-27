@@ -35,9 +35,9 @@ module.exports = {
     },
 
     checkticket: (req, res) => {
-        let ticket_hash = req.body.key;
+        let ticket_hash = req.body.keyhash;
         var result = [];
-        pool.query('SELECT t1.*, t2.ticket_number FROM events as t1, tickets as t2 WHERE t1.event_id = t2.event AND t2.ticket_hash = $1 GROUP BY t1.event_id;', 
+        pool.query('SELECT t1.*, t2.ticket_number FROM events as t1, tickets as t2 WHERE t1.event_id = t2.event AND t2.ticket_hash = $1;', 
           [ticket_hash], (err, response) => {
           if (err) throw err;
           for (let row of response.rows) {

@@ -46,7 +46,7 @@ router.get("/showlastnews", newsController.readlast);
 router.get("/showallevents", eventController.readall);
 
 router.post("/getticket", ticketController.create);
-router.get("/checkticket", ticketController.checkticket);
+router.post("/checkticket", ticketController.checkticket);
 router.use((req, res, next) => {
   let auth = checkToken(req, SECRET);
   if (auth.status === "error") {
