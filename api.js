@@ -4,6 +4,7 @@ const newsController = require("./controllers/newsController");
 const eventController = require("./controllers/eventController");
 const ticketController = require("./controllers/ticketController");
 const mailController = require("./controllers/mailController");
+const circleController = require("./controllers/circleController");
 const jwt = require("jsonwebtoken");
 var { SECRET } = require("./config");
 
@@ -44,6 +45,8 @@ router.post("/signin", userController.login);
 router.get("/showallnews", newsController.readall);
 router.get("/showlastnews", newsController.readlast);
 
+router.get("/showallcircles", circleController.readall);
+
 router.get("/showallevents", eventController.readall);
 
 router.post("/getticket", ticketController.create);
@@ -64,6 +67,10 @@ router.get("/check", userController.check);
 router.post("/addnews", newsController.create);
 router.post("/delnews", newsController.delete);
 router.post("/updatenews", newsController.change_news);
+// circles
+router.post("/addcircle", circleController.create);
+router.post("/delcircle", circleController.delete);
+router.post("/updatecircle", circleController.change_circle);
 // events
 router.post("/addevent", eventController.create);
 router.post("/delevent", eventController.delete);

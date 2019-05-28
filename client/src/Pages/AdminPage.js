@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import axios from "axios";
 import AdminMain from "../Components/AdminMain/AdminMain";
 import AdminNews from "../Components/AdminNews/AdminNews";
+import AdminCircles from "../Components/AdminCircles/AdminCircles";
 import AdminEvents from "../Components/AdminEvents/AdminEvents";
 import AdminLogin from "../Components/AdminLogin/AdminLogin";
 import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
@@ -74,6 +75,14 @@ class AdminPage extends Component {
                 События
               </NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink
+                className={classnames({ active: this.state.activeTab === '4' })}
+                onClick={() => { this.toggle('4'); }}
+              >
+                Кружки
+              </NavLink>
+            </NavItem>
           </Nav>
           <TabContent activeTab={this.state.activeTab}>
             <TabPane tabId="1">
@@ -84,6 +93,9 @@ class AdminPage extends Component {
             </TabPane>
             <TabPane tabId="3">
               <AdminEvents/>
+            </TabPane>
+            <TabPane tabId="4">
+              <AdminCircles />
             </TabPane>
           </TabContent>
         </div>

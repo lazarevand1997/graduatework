@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import Header from "../Components/Header/Header";
-import Events from "../Components/Events/Events";
+import Circles from "../Components/Circles/Circles";
 
-class EventsPage extends Component {
+class CirclesPage extends Component {
 
   render() {
     return (
       <div>
         <Header/>
-        <Events />
+        <Circles/>
       </div>
     );
   }
 }
 
-export default EventsPage;
+export default CirclesPage;

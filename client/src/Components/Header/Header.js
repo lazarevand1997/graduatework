@@ -46,6 +46,9 @@ export default class Header extends React.Component {
               <NavLink href="/#newsblock">Новости</NavLink>
             </NavItem>
             <NavItem>
+              <NavLink href="/circles">Кружки</NavLink>
+            </NavItem>
+            <NavItem>
               <NavLink href="/events">Расписание</NavLink>
             </NavItem>
             <NavItem>
