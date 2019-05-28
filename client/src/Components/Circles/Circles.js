@@ -29,7 +29,10 @@ class Circles extends Component {
   render() {
     return (
       <div className="container circles-wrapper">
-        <div class="card-columns">
+        <div className="events-title wow mt-2 fadeIn">
+            <h1>Кружки и занятия</h1>
+        </div>
+        <div class="card-columns  mt-5 wow fadeInUpBig">
           {this.state.data.map((item, key) => {
             let circleItem = JSON.parse(item);
             return (

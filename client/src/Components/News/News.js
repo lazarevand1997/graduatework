@@ -31,22 +31,22 @@ class News extends Component {
     return (
       <div className="container-fluid news" id="newsblock">
         <div className="text-center">
-          <h1 className="news-title">Последние новости</h1>
+          <h1 className="news-title wow fadeInUpBig">Последние новости</h1>
         </div>
-        <div className="container pt-5">
+        <div className="container pt-5 wow fadeInUpBig" data-wow-delay="0.5s">
 
           {this.state.data.map((item, key) => {
                 let newsItem = JSON.parse(item);
                 let dateNews = newsItem.news_date;
                 dateNews = dateNews.substring(0, dateNews.length-14);
                     return (
-                        <div key={key} class="card mt-3">
-                          <div class="card-header text-left">
+                        <div key={key} className="card mt-3">
+                          <div className="card-header text-left">
                             <i>{dateNews}</i>
                           </div>
-                          <div class="card-body">
-                            <h5 class="card-title">{newsItem.news_name}</h5>
-                            <p class="card-text">{newsItem.description}</p>
+                          <div className="card-body">
+                            <h5 className="card-title">{newsItem.news_name}</h5>
+                            <p className="card-text">{newsItem.description}</p>
                           </div>
                         </div>
                     );

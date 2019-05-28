@@ -74,10 +74,10 @@ class Events extends Component {
   render() {
     return (
       <div className="container events-wrapper">
-        <div className="events-title">
+        <div className="events-title wow mt-3 fadeIn">
             <h1>Расписание событий и мероприятий</h1>
         </div>
-        <div className="events-case mt-5">
+        <div className="events-case mt-5 wow fadeInUpBig">
         {this.state.data.map((item, key) => {
                 let event = JSON.parse(item);
                 let eventDate = event.event_date;
