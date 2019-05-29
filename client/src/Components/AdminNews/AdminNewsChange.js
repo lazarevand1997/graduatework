@@ -54,7 +54,7 @@ class AdminNewsChange extends Component {
             </FormGroup>
             <FormGroup>
             <Label for="textmodaldesc">Описание</Label>
-            <Input onChange={this.handleDescription} type="text" name="textmodaldesc" id="textmodaldesc" value={description} />
+            <Input onChange={this.handleDescription} type="textarea" name="textmodaldesc" id="textmodaldesc" value={description} />
             </FormGroup>
             <div className="text-center">
                 <Button onClick={this.updateNews.bind(this)} color="info">Сохранить изменения</Button>

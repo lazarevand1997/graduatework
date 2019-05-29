@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Row, Col, Button, Form, FormGroup, Input } from 'reactstrap';
 import axios from "axios";
 
 class AdminPage extends Component {
@@ -57,10 +57,10 @@ class AdminPage extends Component {
                 <h3 className="pb-3">Панель анминистратора</h3>
                 <Form>
                     <FormGroup>
-                    <Input onChange={this.handleLoginChange} type="text" name="adminLogin" id="adminLogin" placeholder="Login" />
+                    <Input onChange={this.handleLoginChange} type="text" name="adminLogin" id="adminLogin" placeholder="Имя пользователя" />
                     </FormGroup>
                     <FormGroup>
-                    <Input onChange={this.handlePasswordChange} type="password" name="password" id="examplePassword" placeholder="don't tell!" />
+                    <Input onChange={this.handlePasswordChange} type="password" name="password" id="examplePassword" placeholder="Пароль" />
                     </FormGroup>
                     <Button onClick={this.signIn.bind(this)}>Войти</Button>
                 </Form>

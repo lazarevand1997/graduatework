@@ -87,34 +87,35 @@ class AdminMain extends Component {
               <Col sm="6">
                 <img className="admin-img" src={require("../../Images/admin.png")} alt="admin"/>
                 <div className="mt-3">
-                  <p>UserName: {username}</p>
+                  <p>Имя пользователя: {username}</p>
                   <p>E-mail: {email}</p>
                   <p><Button onClick={this.logout.bind(this)} color="warning">Выйти</Button></p>
                 </div>
               </Col>
               <Col sm="6">
-                <h3 className="mt-4 mb-4">Добавить пользователя</h3>
+                <h3 className="mt-4 mb-1">Добавить пользователя</h3>
+                <p className="mt-1 mb-3">Для подтверждения обратитесь к системному администратору</p>
                 <Form>
                   <Row form>
                     <Col md={6}>
                       <FormGroup>
-                      <Label for="userName">User name</Label>
-                      <Input onChange={this.handleLogin} type="text" name="userName" id="userName" placeholder="User name"/>
+                      <Label for="userName">Имя пользователя</Label>
+                      <Input onChange={this.handleLogin} type="text" name="userName" id="userName" placeholder=""/>
                     </FormGroup>
                     </Col>
                     <Col md={6}>
                       <FormGroup>
-                        <Label for="Password">Password</Label>
-                        <Input onChange={this.handlePassword} type="password" name="password" id="Password" placeholder="password" />
+                        <Label for="Password">Пароль</Label>
+                        <Input onChange={this.handlePassword} type="password" name="password" id="Password" placeholder="" />
                       </FormGroup>
                     </Col>
                   </Row>
                   <FormGroup>
                         <Label for="exampleEmail">Email</Label>
-                        <Input onChange={this.handleEmail} type="email" name="email" id="exampleEmail" placeholder="with a placeholder" />
+                        <Input onChange={this.handleEmail} type="email" name="email" id="exampleEmail" placeholder="" />
                   </FormGroup>
                   <FormGroup >
-                    <Button onClick={this.signUp.bind(this)} color="info">Add user</Button>
+                    <Button onClick={this.signUp.bind(this)} color="info">Добавить нового пользователя</Button>
                   </FormGroup>
                 </Form>
               </Col>

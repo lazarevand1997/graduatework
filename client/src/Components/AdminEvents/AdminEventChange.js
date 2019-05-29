@@ -72,7 +72,7 @@ class AdminEventsChange extends Component {
             </FormGroup>
             <FormGroup>
                 <Label for="textmodaldesc">Описание</Label>
-                <Input onChange={this.handleDescription} type="text" name="textmodaldesc" id="textmodaldesc" value={description} />
+                <Input onChange={this.handleDescription} type="textarea" name="textmodaldesc" id="textmodaldesc" value={description} />
             </FormGroup>
             <FormGroup>
                 <Label for="modaleventTickets">Кол-во билетов (не менее {min_tickets})</Label>

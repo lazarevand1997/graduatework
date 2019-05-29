@@ -49,7 +49,7 @@ export default class Header extends React.Component {
               <NavLink href="/circles">Кружки</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/events">Расписание</NavLink>
+              <NavLink href="/events">Мероприятия</NavLink>
             </NavItem>
             <NavItem>
               <text onClick={this.toggleModal}  className="nav-link ticket-check-button">

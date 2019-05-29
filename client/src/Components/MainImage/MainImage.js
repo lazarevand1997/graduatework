@@ -10,7 +10,7 @@ class MainImage extends Component {
         <div className="maintext-wrapper">
           <div className="maintext wow fadeInUpBig">
             <p>Дом Культуры</p>
-            <p className="maintextabout">Краткое описание дома культуры МИЭТ</p>
+            <p className="maintextabout">Расписание кружков, афиша мероприятий, новости и контакты.</p>
           </div>
         </div>
         </div>

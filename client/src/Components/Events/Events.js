@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Button, CardTitle, CardText, Modal, ModalHeader, ModalBody } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import "./Events.css";
 import axios from "axios";
 import $ from "jquery";
@@ -97,7 +97,7 @@ class Events extends Component {
                               <h5 className="card-title"> {event.event_name}</h5>
                               <p className="card-text">
                                 {event.description}
-                                <br/>Билеты: {eventTickets} / {event.tickets}
+                                <br/>Куплено билетов: {eventTickets} / {event.tickets}
                               </p>
                               <div className="text-center">
                                 <Button 

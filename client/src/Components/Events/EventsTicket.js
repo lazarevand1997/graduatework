@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Input } from 'reactstrap';
 import axios from "axios";
 
 
@@ -48,7 +48,6 @@ class AdminNewsChange extends Component {
 
   render() {
       let title = this.state.title;
-      let description = this.state.description;
       let date = this.state.date;
       let tickets = this.state.tickets;
       let uses_tickets = this.state.uses_tickets;
